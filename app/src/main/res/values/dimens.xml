@@ -1,0 +1,43 @@
+<resources>
+
+    <!-- Google Android Material Design guidelines -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="item_width">200dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    <dimen name="fab_elevation">6dp</dimen>
+    <dimen name="app_bar_elevation">4dp</dimen>
+    <dimen name="two_line_list_height">72dp</dimen>
+    <dimen name="grid_layout_row_height">36dp</dimen>
+    <dimen name="two_line_list_font_size">16sp</dimen>
+    <dimen name="two_line_list_font_size_secondary">14sp</dimen>
+
+    <dimen name="regular_56_font">56sp</dimen>
+    <dimen name="regular_45_font">45sp</dimen>
+    <dimen name="regular_34_font">34sp</dimen>
+    <dimen name="regular_24_font">24sp</dimen>
+    <dimen name="medium_20_font">20sp</dimen>
+
+    <dimen name="button_CAPS_text">14sp</dimen>
+    <dimen name="sub_heading_text">16sp</dimen>
+    <dimen name="title_text">20sp</dimen>
+    <dimen name="headline_text">24sp</dimen>
+    <dimen name="body_text">14sp</dimen>
+    <dimen name="toolbar_elevation">8dp</dimen>
+    <dimen name="sheet_elevation">3dp</dimen>
+
+    <dimen name="list_item_height">72dp</dimen>
+    <dimen name="circle_image_width">72dp</dimen>
+    <dimen name="circle_image_horizontal_padding">16dp</dimen>
+    <dimen name="content_indent">72dp</dimen>
+    <dimen name="detail_gap_between_content">8dp</dimen>
+
+    <dimen name="recipe_adapter_gap_1">1dp</dimen>
+    <dimen name="recipe_adapter_gap_4">4dp</dimen>
+
+</resources>
