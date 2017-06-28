@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 import com.jeannaclark.android.charbakingapp.R;
 import com.jeannaclark.android.charbakingapp.model.Recipe;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by birdy on 6/26/17.
@@ -27,6 +29,7 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
 
     private ArrayList<Recipe> recipes;
     private Context mContext;
+    private boolean isFavorite;
 
     public MainActivityAdapter(ArrayList<Recipe> recipes) {
         this.recipes = recipes;
@@ -58,17 +61,29 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
         if (recipe != null) {
             viewHolder.recipeNameView.setText(recipe.getName());
 
-            Picasso.with(getContext())
+            Picasso.with(mContext)
                     .load(recipe.getImageURL())
                     .placeholder(R.drawable.ic_menu_gallery)
                     .error(R.drawable.ic_error_black_24dp)
                     .into(viewHolder.imageView);
+
+            viewHolder.favoriteButton.setChecked(isFavorite);
         }
     }
 
+    @OnClick(R.id.recipe_card_share_button)
+    void shareRecipe() {
+        //TODO: insert button functions
+        Toast.makeText(mContext, "Insert share button functionality",
+                Toast.LENGTH_SHORT).show();
+    }
 
-
-
+    @OnClick(R.id.recipe_card_favorite_button)
+    void favoriteRecipe() {
+        //TODO: insert button functions
+        Toast.makeText(mContext, "Insert favorite toggle button functionality",
+                Toast.LENGTH_SHORT).show();
+    }
 
     public class MainActivityViewHolder extends RecyclerView.ViewHolder {
 

@@ -5,10 +5,36 @@ A basic recipe app that utilizes Firebase's real-time database in cooperation wi
 
 ## _Implements_
 
+_Android Technologies:_
+
+- Accessibility
+- Spanish, French, Arabic (i.e., right to left) translation
+- Parcelable object packaging
+- Espresso testing
+- collection hybrid widget
+- Exoplayer video player
+- detail flow activity
+- SVG assets
+- Fragments
+- SearchView / SearchManager / Google Voice Search
+- SwipeRefreshLayout
+- tablet + phone layouts
+- PercentRelativeLayouts
+- recyclerView with heterogeneous XML layouts
+- custom recyclerView adapters
+- ShareActionProvider
+- Facebook Stetho
+- Square LeakCanary
+- Square Picasso image rendering
+- Firebase real-time database
+- Butterknife view injection
+
+***
+
 - Cards for the Launch Activity's recipe list
     - ![](planning/wireframes-GMD/main_activity-recipe_card.png)
     - [source](https://material.io/guidelines/components/cards.html#cards-usage)
-    - Actions will include ShareActionProvider & an Intent to the onClick's DetailFlow MainActivity
+    - Actions will include ShareActionProvider, Favorite & an Intent to the onClick's DetailFlow MainActivity
 - Data Tables for the DetailFlow's MainActivity ingredients list item
     - ![](planning/wireframes-GMD/data_table_vertical_for_ingredients.png)
     - ![](planning/wireframes-GMD/data_table_header_footer.png)
@@ -30,30 +56,6 @@ A basic recipe app that utilizes Firebase's real-time database in cooperation wi
     - Actions will include 'last' & 'next' with step progress metric
 - widget 
     - displays ingredients list for desired recipe (hybrid collections widget)
-
-***
-
-_Android Technologies:_
-
-- Accessibility
-- Spanish, French, Arabic (i.e., right to left) translation
-- Parcelable object packaging
-- Espresso testing
-- collection hybrid widget
-- Exoplayer video player
-- detail flow activity
-- SVG assets
-- Fragments
-- SwipeRefreshLayout
-- tablet + phone layouts
-- recyclerView with heterogeneous XML layouts
-- custom adapters
-- ShareActionProvider
-- Facebook Stetho
-- Square LeakCanary
-- Square Picasso image rendering
-- Firebase real-time database
-- Butterknife view injection
 
 ## _Sources_
 
