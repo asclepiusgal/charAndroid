@@ -29,6 +29,15 @@ _Android Technologies:_
 - Firebase real-time database
 - Butterknife view injection
 
+*** 
+
+# _UI screenshots_
+
+- Phone MainActivity empty list
+    - ![](readme/UI_screenshots/empty_main_activity.png)
+- Phone MainActivity recipe recyclerView
+    - ![]()
+
 ***
 
 - Cards for the Launch Activity's recipe list

@@ -10,8 +10,13 @@ import android.view.Menu;
 import android.widget.SearchView;
 import android.widget.Toast;
 import com.facebook.stetho.Stetho;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.jeannaclark.android.charbakingapp.R;
+import com.jeannaclark.android.charbakingapp.model.Recipe;
 import com.squareup.leakcanary.LeakCanary;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,18 +26,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null) {
-
-            Bundle arguments = new Bundle();
-            arguments.putParcelable(MainActivityFragment.URI_MAIN, getIntent().getData());
-
-            MainActivityFragment mainActivityFragment = (MainActivityFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.activity_main_fragment_container);
-            if (null != mainActivityFragment) {
-                mainActivityFragment.getRecipeData();
-            }
-        }
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -41,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
             String query = intent.getStringExtra(SearchManager.QUERY);
             doSearch(query);
         }
+
+        MainActivityFragment mainActivityFragment = new MainActivityFragment();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.activity_main_fragment_container, mainActivityFragment)
+                .commit();
 
         Stetho.initializeWithDefaults(this);
         LeakCanary.install(getApplication());
@@ -73,7 +72,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doSearch(String query) {
-        // TODO: query data based on search submission goes here
+        ArrayList<Recipe> queryResults = new ArrayList<>();
+
+        // TODO: insert firebase query on search submission & update adapter
         Toast.makeText(getApplicationContext(), "Your search query: " + query, Toast.LENGTH_LONG)
                 .show();
     }
