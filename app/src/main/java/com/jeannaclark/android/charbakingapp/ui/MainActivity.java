@@ -5,23 +5,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.SearchView;
 import android.widget.Toast;
+
 import com.facebook.stetho.Stetho;
 import com.jeannaclark.android.charbakingapp.R;
 import com.jeannaclark.android.charbakingapp.model.Recipe;
-import com.squareup.leakcanary.LeakCanary;
 
 import java.util.ArrayList;
-
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
 
         Stetho.initializeWithDefaults(this);
-        LeakCanary.install(getApplication());
+//        LeakCanary.install(getApplication());
     }
 
     @Override

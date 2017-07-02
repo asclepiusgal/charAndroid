@@ -12,18 +12,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.jeannaclark.android.charbakingapp.R;
 import com.jeannaclark.android.charbakingapp.model.Recipe;
+
 import java.util.ArrayList;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class MainActivityFragment extends Fragment {
 
     private ArrayList<Recipe> mRecipeList = new ArrayList<>();
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private MainActivityAdapter mRecipeAdapter;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference myRef = database.getReference();
 
     public MainActivityFragment() {
     }
@@ -35,24 +41,29 @@ public class MainActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_main_recycler_view, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.activity_main_recycler_view);
         mRecipeAdapter = new MainActivityAdapter(mRecipeList);
-        recyclerView.setAdapter(mRecipeAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(mRecipeAdapter);
 
         getRecipeData();
 
         TextView emptyText = view.findViewById(R.id.empty_text);
         ImageView emptyImage = view.findViewById(R.id.empty_image);
 
-        if (mRecipeList.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
+
+            recyclerView.setVisibility(View.VISIBLE);
             emptyText.setVisibility(View.VISIBLE);
             emptyImage.setVisibility(View.VISIBLE);
-        }
-        else {
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyText.setVisibility(View.GONE);
-            emptyImage.setVisibility(View.GONE);
-        }
+
+
+//        if (mRecipeList.isEmpty()) {
+//            recyclerView.setVisibility(View.GONE);
+//            emptyText.setVisibility(View.VISIBLE);
+//            emptyImage.setVisibility(View.VISIBLE);
+//        } else {
+//            recyclerView.setVisibility(View.VISIBLE);
+//            emptyText.setVisibility(View.GONE);
+//            emptyImage.setVisibility(View.GONE);
+//        }
 
         mSwipeRefreshLayout = (SwipeRefreshLayout)
                 view.findViewById(R.id.activity_main_swipe_refresh_layout);
@@ -77,9 +88,19 @@ public class MainActivityFragment extends Fragment {
     public void getRecipeData() {
         mRecipeList.clear();
         mRecipeAdapter.notifyDataSetChanged();
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Recipe recipe = child.getValue(Recipe.class);
+                    mRecipeList.add(recipe);
+                } mRecipeAdapter.notifyDataSetChanged();
+            }
 
-        //TODO: insert retroFit call + insertion to database
-
-        mRecipeAdapter.notifyDataSetChanged();
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.w("\n\n\nin onCancelled()", "Failed to read value.", error.toException());
+            }
+        });
     }
 }

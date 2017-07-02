@@ -1,17 +1,14 @@
 package com.jeannaclark.android.charbakingapp.model;
 
-/**
- * Created by birdy on 6/20/17.
- */
-
 import android.os.Parcel;
 import android.os.Parcelable;
-
+import com.google.firebase.database.IgnoreExtraProperties;
 
 /**
- * Created by birdy on 6/20/17.
+ * Created by birdy on 7/1/17.
  */
 
+@IgnoreExtraProperties
 public class Step implements Parcelable {
 
     public String description;
