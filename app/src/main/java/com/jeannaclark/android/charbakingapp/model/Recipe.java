@@ -3,15 +3,12 @@ package com.jeannaclark.android.charbakingapp.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.firebase.database.IgnoreExtraProperties;
-
 import java.util.ArrayList;
 
 /**
  * Created by birdy on 6/20/17.
  */
 
-@IgnoreExtraProperties
 public class Recipe implements Parcelable {
 
     public ArrayList<Ingredient> ingredients;

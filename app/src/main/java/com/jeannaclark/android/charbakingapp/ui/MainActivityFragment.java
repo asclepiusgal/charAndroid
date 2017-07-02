@@ -12,11 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.jeannaclark.android.charbakingapp.R;
 import com.jeannaclark.android.charbakingapp.model.Recipe;
 import java.util.ArrayList;
@@ -42,6 +37,8 @@ public class MainActivityFragment extends Fragment {
         mRecipeAdapter = new MainActivityAdapter(mRecipeList);
         recyclerView.setAdapter(mRecipeAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        getRecipeData();
 
         TextView emptyText = view.findViewById(R.id.empty_text);
         ImageView emptyImage = view.findViewById(R.id.empty_image);
@@ -71,12 +68,6 @@ public class MainActivityFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        getRecipeData();
-        super.onActivityCreated(savedInstanceState);
-    }
-
     public void updateRecipes() {
         getRecipeData();
         mSwipeRefreshLayout.setRefreshing(false);
@@ -86,23 +77,9 @@ public class MainActivityFragment extends Fragment {
     public void getRecipeData() {
         mRecipeList.clear();
         mRecipeAdapter.notifyDataSetChanged();
-        DatabaseReference myRecipeRef = FirebaseDatabase.getInstance().getReference();
 
-        myRecipeRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    //TODO: connect to Firebase data
-                    Recipe recipe = child.getValue(Recipe.class);
-                    mRecipeList.add(recipe);
-                }
-                mRecipeAdapter.notifyDataSetChanged();
-            }
+        //TODO: insert retroFit call + insertion to database
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("Error", databaseError.getMessage());
-            }
-        });
+        mRecipeAdapter.notifyDataSetChanged();
     }
 }

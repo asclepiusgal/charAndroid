@@ -26,7 +26,7 @@ _Android Technologies:_
 - Facebook Stetho
 - Square LeakCanary
 - Square Picasso image rendering
-- Firebase real-time database
+- SQLite database with content provider
 - Butterknife view injection
 
 *** 

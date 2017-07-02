@@ -10,8 +10,6 @@ import android.view.Menu;
 import android.widget.SearchView;
 import android.widget.Toast;
 import com.facebook.stetho.Stetho;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.jeannaclark.android.charbakingapp.R;
 import com.jeannaclark.android.charbakingapp.model.Recipe;
 import com.squareup.leakcanary.LeakCanary;
