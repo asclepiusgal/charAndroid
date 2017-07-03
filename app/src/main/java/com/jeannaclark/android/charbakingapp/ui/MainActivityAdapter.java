@@ -1,16 +1,21 @@
 package com.jeannaclark.android.charbakingapp.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.jeannaclark.android.charbakingapp.R;
 import com.jeannaclark.android.charbakingapp.model.Recipe;
 import com.squareup.picasso.Picasso;
@@ -19,6 +24,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 /**
@@ -29,7 +35,9 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
 
     private ArrayList<Recipe> recipes;
     private Context mContext;
-    private boolean isFavorite;
+    private int mPosition;
+    private MainActivityViewHolder mViewHolder;
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     public MainActivityAdapter(ArrayList<Recipe> recipes) {
         this.recipes = recipes;
@@ -46,8 +54,8 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
 
     @Override
     public void onBindViewHolder(MainActivityViewHolder mainActivityViewHolder, int position) {
-        MainActivityViewHolder viewHolder = (MainActivityViewHolder) mainActivityViewHolder;
-        configureRecipeViewHolder(viewHolder, position);
+        MainActivityViewHolder mViewHolder = (MainActivityViewHolder) mainActivityViewHolder;
+        configureRecipeViewHolder(mViewHolder, position);
     }
 
     @Override
@@ -55,34 +63,22 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
         return recipes.size();
     }
 
-    private void configureRecipeViewHolder(MainActivityViewHolder viewHolder, int position) {
+    private void configureRecipeViewHolder(final MainActivityViewHolder viewHolder, final int position) {
         Recipe recipe = (Recipe) recipes.get(position);
+        mPosition = position;
+        mViewHolder = viewHolder;
 
         if (recipe != null) {
-            viewHolder.recipeNameView.setText(recipe.getName());
+            mViewHolder.recipeNameView.setText(recipe.getName());
 
             Picasso.with(mContext)
-                    .load(recipe.getImageURL())
+                    .load(recipe.getImage())
                     .placeholder(R.drawable.ic_menu_gallery)
                     .error(R.drawable.ic_error_black_24dp)
-                    .into(viewHolder.imageView);
+                    .into(mViewHolder.imageView);
 
-            viewHolder.favoriteButton.setChecked(isFavorite);
+            mViewHolder.favoriteButton.setChecked(recipe.isFavorite());
         }
-    }
-
-    @OnClick(R.id.recipe_card_share_button)
-    void shareRecipe() {
-        //TODO: insert button functions
-        Toast.makeText(mContext, "Insert share button functionality",
-                Toast.LENGTH_SHORT).show();
-    }
-
-    @OnClick(R.id.recipe_card_favorite_button)
-    void favoriteRecipe() {
-        //TODO: insert button functions
-        Toast.makeText(mContext, "Insert favorite toggle button functionality",
-                Toast.LENGTH_SHORT).show();
     }
 
     public class MainActivityViewHolder extends RecyclerView.ViewHolder {
@@ -98,11 +94,28 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
         @BindView(R.id.recipe_card_view)
         CardView cardView;
 
-        // TODO: update activity_XML_card_view to use dimen.xml & remove hardcoding
-
         public MainActivityViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+
+        @OnClick(R.id.recipe_card_share_button)
+        void shareRecipe() {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            shareIntent.setType("text/plain");
+            //TODO: update placeholder to send recipe data
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "Recipe placeholder");
+            mContext.startActivity(shareIntent);
+            Log.v("share button: ", "sending intent");
+        }
+
+        @OnCheckedChanged(R.id.recipe_card_favorite_button)
+        void favoriteRecipe(CompoundButton button, boolean isChecked) {
+            //TODO: fix listener bug: automatically updates favorite to isChecked & !isChecked consecutively
+            mDatabase.child(mPosition + "/favorite").setValue(isChecked);
+            Log.v("favorite updated: ", Boolean.toString(isChecked));
+            mViewHolder.favoriteButton.setChecked(isChecked);
         }
     }
 }

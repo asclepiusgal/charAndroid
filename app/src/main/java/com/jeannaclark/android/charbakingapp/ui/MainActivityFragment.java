@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +32,9 @@ public class MainActivityFragment extends Fragment {
     private MainActivityAdapter mRecipeAdapter;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
+    private RecyclerView recyclerView;
+    private TextView emptyText;
+    private ImageView emptyImage;
 
     public MainActivityFragment() {
     }
@@ -39,31 +44,19 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_main_recycler_view, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.activity_main_recycler_view);
+        recyclerView = view.findViewById(R.id.activity_main_recycler_view);
         mRecipeAdapter = new MainActivityAdapter(mRecipeList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(mRecipeAdapter);
 
         getRecipeData();
 
-        TextView emptyText = view.findViewById(R.id.empty_text);
-        ImageView emptyImage = view.findViewById(R.id.empty_image);
+        emptyText = view.findViewById(R.id.empty_text);
+        emptyImage = view.findViewById(R.id.empty_image);
 
-
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyText.setVisibility(View.VISIBLE);
-            emptyImage.setVisibility(View.VISIBLE);
-
-
-//        if (mRecipeList.isEmpty()) {
-//            recyclerView.setVisibility(View.GONE);
-//            emptyText.setVisibility(View.VISIBLE);
-//            emptyImage.setVisibility(View.VISIBLE);
-//        } else {
-//            recyclerView.setVisibility(View.VISIBLE);
-//            emptyText.setVisibility(View.GONE);
-//            emptyImage.setVisibility(View.GONE);
-//        }
+        recyclerView.setVisibility(View.GONE);
+        emptyText.setVisibility(View.VISIBLE);
+        emptyImage.setVisibility(View.VISIBLE);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout)
                 view.findViewById(R.id.activity_main_swipe_refresh_layout);
@@ -94,7 +87,12 @@ public class MainActivityFragment extends Fragment {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     Recipe recipe = child.getValue(Recipe.class);
                     mRecipeList.add(recipe);
-                } mRecipeAdapter.notifyDataSetChanged();
+                }
+
+                mRecipeAdapter.notifyDataSetChanged();
+                recyclerView.setVisibility(View.VISIBLE);
+                emptyText.setVisibility(View.GONE);
+                emptyImage.setVisibility(View.GONE);
             }
 
             @Override

@@ -17,25 +17,30 @@ public class Recipe implements Parcelable {
     public ArrayList<Ingredient> ingredients;
     public ArrayList<Step> steps;
     public String name;
-    public String imageURL;
+    public String image;
     public int servings;
+    public Boolean favorite;
 
-    public Recipe() {}
+    public Recipe() {
+    }
 
-    public Recipe(ArrayList<Ingredient> ingredients, ArrayList<Step> steps, String name, String imageURL, int servings) {
+    public Recipe(ArrayList<Ingredient> ingredients, ArrayList<Step> steps, String name, String image,
+                  int servings, Boolean favorite) {
         this.ingredients = ingredients;
         this.steps = steps;
         this.name = name;
-        this.imageURL = imageURL;
+        this.image = image;
         this.servings = servings;
+        this.favorite = favorite;
     }
 
     public Recipe(Parcel in) {
         ingredients = in.readArrayList(null);
         steps = in.readArrayList(null);
         name = in.readString();
-        imageURL = in.readString();
+        image = in.readString();
         servings = in.readInt();
+        favorite = in.readInt() == 1;
     }
 
     public ArrayList<Ingredient> getIngredients() {
@@ -50,12 +55,16 @@ public class Recipe implements Parcelable {
         return name;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImage() {
+        return image;
     }
 
     public int getServings() {
         return servings;
+    }
+
+    public Boolean isFavorite() {
+        return favorite;
     }
 
     public void setIngredients(ArrayList<Ingredient> ingredients) {
@@ -70,12 +79,16 @@ public class Recipe implements Parcelable {
         this.name = name;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public void setServings(int servings) {
         this.servings = servings;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        this.favorite = favorite;
     }
 
     @Override
@@ -88,8 +101,9 @@ public class Recipe implements Parcelable {
         parcel.writeList(ingredients);
         parcel.writeList(steps);
         parcel.writeString(name);
-        parcel.writeString(imageURL);
+        parcel.writeString(image);
         parcel.writeInt(servings);
+        parcel.writeInt(favorite ? 1 : 0);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
