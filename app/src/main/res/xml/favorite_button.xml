@@ -5,12 +5,11 @@
     android:layout_width="wrap_content">
 
     <item
-        android:drawable="@drawable/ic_favorite_black_24dp"
-        android:state_selected="true"
-        android:tint="@color/material_pink_A400"/>
+        android:drawable="@drawable/ic_favorite_pink_24dp"
+        android:state_selected="true"/>
 
     <item
-        android:drawable="@drawable/ic_favorite_black_24dp"
-        android:tint="@color/material_blue_grey_fallback_300"/>
+        android:drawable="@drawable/ic_favorite_grey_24dp"
+        android:state_selected="false"/>
 
 </selector>

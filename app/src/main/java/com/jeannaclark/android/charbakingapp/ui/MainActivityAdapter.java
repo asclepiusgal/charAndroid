@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.firebase.database.DatabaseReference;
@@ -114,8 +115,11 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
         void favoriteRecipe(CompoundButton button, boolean isChecked) {
             //TODO: fix listener bug: automatically updates favorite to isChecked & !isChecked consecutively
             mDatabase.child(mPosition + "/favorite").setValue(isChecked);
+            Toast.makeText(mContext, "Favorite toggled", Toast.LENGTH_LONG).show();
             Log.v("favorite updated: ", Boolean.toString(isChecked));
             mViewHolder.favoriteButton.setChecked(isChecked);
+
+
         }
     }
 }

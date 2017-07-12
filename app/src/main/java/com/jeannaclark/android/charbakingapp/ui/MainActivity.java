@@ -18,6 +18,14 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    // TODO: develop widget
+    // TODO: develop tablet UI XML + twoPane heterogeneous fragments
+    // TODO: add espresso error handling tests
+    // TODO: add exoplayer to detail activity
+    // TODO: submit for grading
+    // TODO: add UI + battery data to readme
+    // TODO: publish to google play
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
