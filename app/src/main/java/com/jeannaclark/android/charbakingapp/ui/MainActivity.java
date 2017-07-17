@@ -3,6 +3,7 @@ package com.jeannaclark.android.charbakingapp.ui;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.SearchView;
@@ -18,13 +19,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    // TODO: develop widget
     // TODO: develop tablet UI XML + twoPane heterogeneous fragments
-    // TODO: add espresso error handling tests
-    // TODO: add exoplayer to detail activity
-    // TODO: submit for grading
-    // TODO: add UI + battery data to readme
-    // TODO: publish to google play
+    // TODO: add onSavedInstanceState
+    // TODO: add UI + battery performance data to readme
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

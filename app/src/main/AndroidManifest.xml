@@ -27,24 +27,6 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity
-            android:name=".ui.RecipeStepListActivity"
-            android:label="@string/title_recipe_step_list"
-            android:parentActivityName=".ui.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jeannaclark.android.charbakingapp.ui.MainActivity" />
-        </activity>
-        <activity
-            android:name=".ui.RecipeStepDetailActivity"
-            android:label="@string/title_recipe_step_detail"
-            android:parentActivityName=".ui.RecipeStepListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jeannaclark.android.charbakingapp.ui.RecipeStepListActivity" />
-        </activity>
 
         <receiver android:name=".widget.CharWidgetProvider">
             <intent-filter>
@@ -55,6 +37,25 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/char_widget_info" />
         </receiver>
+
+        <activity
+            android:name=".ui.DetailFlowListActivity"
+            android:label="@string/title_recipe_list"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jeannaclark.android.charbakingapp.ui.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.DetailFlowDetailActivity"
+            android:label="@string/title_recipe_detail"
+            android:parentActivityName=".ui.DetailFlowListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jeannaclark.android.charbakingapp.ui.DetailFlowListActivity" />
+        </activity>
     </application>
 
 </manifest>

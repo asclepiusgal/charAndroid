@@ -2,6 +2,7 @@ package com.jeannaclark.android.charbakingapp.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,14 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.jeannaclark.android.charbakingapp.R;
 import com.jeannaclark.android.charbakingapp.model.Recipe;
 import com.squareup.picasso.Picasso;
@@ -25,7 +28,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 /**
@@ -36,9 +38,8 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
 
     private ArrayList<Recipe> recipes;
     private Context mContext;
-    private int mPosition;
-    private MainActivityViewHolder mViewHolder;
-    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference mDatabase;
+    private Boolean mIsFavorite;
 
     public MainActivityAdapter(ArrayList<Recipe> recipes) {
         this.recipes = recipes;
@@ -66,19 +67,17 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
 
     private void configureRecipeViewHolder(final MainActivityViewHolder viewHolder, final int position) {
         Recipe recipe = (Recipe) recipes.get(position);
-        mPosition = position;
-        mViewHolder = viewHolder;
 
         if (recipe != null) {
-            mViewHolder.recipeNameView.setText(recipe.getName());
+            viewHolder.recipeNameView.setText(recipe.getName());
 
             Picasso.with(mContext)
                     .load(recipe.getImage())
                     .placeholder(R.drawable.ic_menu_gallery)
                     .error(R.drawable.ic_error_black_24dp)
-                    .into(mViewHolder.imageView);
+                    .into(viewHolder.imageView);
 
-            mViewHolder.favoriteButton.setChecked(recipe.isFavorite());
+            viewHolder.favoriteButton.setSelected(recipe.isFavorite());
         }
     }
 
@@ -95,6 +94,8 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
         @BindView(R.id.recipe_card_view)
         CardView cardView;
 
+        private Recipe mRecipe;
+
         public MainActivityViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -102,24 +103,57 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
 
         @OnClick(R.id.recipe_card_share_button)
         void shareRecipe() {
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-            shareIntent.setType("text/plain");
-            //TODO: update placeholder to send recipe data
-            shareIntent.putExtra(Intent.EXTRA_TEXT, "Recipe placeholder");
-            mContext.startActivity(shareIntent);
-            Log.v("share button: ", "sending intent");
+
+            DatabaseReference database = FirebaseDatabase.getInstance().getReference()
+                    .child(Integer.toString(getAdapterPosition()));
+
+            database.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    mRecipe = dataSnapshot.getValue(Recipe.class);
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, mRecipe.getName());
+                    mContext.startActivity(shareIntent);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    Log.w("\n\n\nin onCancelled()", "Failed to read value.", error.toException());
+                }
+            });
         }
 
-        @OnCheckedChanged(R.id.recipe_card_favorite_button)
-        void favoriteRecipe(CompoundButton button, boolean isChecked) {
-            //TODO: fix listener bug: automatically updates favorite to isChecked & !isChecked consecutively
-            mDatabase.child(mPosition + "/favorite").setValue(isChecked);
-            Toast.makeText(mContext, "Favorite toggled", Toast.LENGTH_LONG).show();
-            Log.v("favorite updated: ", Boolean.toString(isChecked));
-            mViewHolder.favoriteButton.setChecked(isChecked);
+        @OnClick(R.id.recipe_card_favorite_button)
+        void favoriteRecipe() {
 
+            mDatabase = FirebaseDatabase.getInstance().getReference()
+                    .child(Integer.toString(getAdapterPosition()) + "/favorite");
 
+            mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    mIsFavorite = (Boolean) dataSnapshot.getValue();
+                    mDatabase.setValue(!mIsFavorite);
+                    Toast.makeText(mContext, "Favorite toggled", Toast.LENGTH_LONG).show();
+                    // TODO: toggle is not updating the stateSelected() XML color / notifyingAdapter
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    Log.w("\n\n\nin onCancelled()", "Failed to read value.", error.toException());
+                }
+            });
+        }
+
+        @OnClick(R.id.recipe_card_image_view)
+        void recipeDetailFlowIntent() {
+            Uri firebaseChildUri = Uri.parse("FirebaseDatabase.getInstance().getReference()" +
+                    ".child(Integer.toString(getAdapterPosition()))");
+            Intent intent = new Intent(mContext, DetailFlowListActivity.class)
+                    .setData(firebaseChildUri);
+            mContext.startActivity(intent);
         }
     }
 }

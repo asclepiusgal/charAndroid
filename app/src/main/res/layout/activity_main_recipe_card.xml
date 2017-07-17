@@ -73,6 +73,7 @@
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
+            android:clickable="true"
             app:layout_constraintDimensionRatio="H,16:9"
             card_view:layout_constraintDimensionRatio="h,16:9"
             card_view:layout_constraintRight_toRightOf="parent"

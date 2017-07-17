@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.jeannaclark.android.charbakingapp.ui.RecipeStepListActivity">
+    tools:context="com.jeannaclark.android.charbakingapp.ui.DetailFlowListActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -22,12 +22,10 @@
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/detail_flow_list_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <include layout="@layout/recipestep_list" />
-    </FrameLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:layout="@layout/activity_detail_flow_list_fragment" />
 
 </android.support.design.widget.CoordinatorLayout>

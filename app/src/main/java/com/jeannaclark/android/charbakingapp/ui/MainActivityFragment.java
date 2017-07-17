@@ -75,7 +75,7 @@ public class MainActivityFragment extends Fragment {
     public void updateRecipes() {
         getRecipeData();
         mSwipeRefreshLayout.setRefreshing(false);
-        Toast.makeText(getContext(), "Data refreshed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), R.string.data_refreshed, Toast.LENGTH_LONG).show();
     }
 
     public void getRecipeData() {
