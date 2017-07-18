@@ -1,10 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
+    android:id="@+id/ingredients_data_table_card_view"
     android:layout_width="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/card_gutter"
+    card_view:cardCornerRadius="@dimen/card_corner_radius"
+    card_view:cardElevation="@dimen/card_elevation_resting">
 
-    <!-- TODO: insert ingredients data table -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/data_table_perimeter_padding"
+        android:layout_gravity="start|center_vertical">
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/data_table_card_header_height"
+            android:text="@string/recipe_ingredients_title"
+            android:gravity="center"
+            android:textSize="@dimen/data_table_card_title"
+            android:textColor="@color/data_table_content_transparency_87_percent_black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/data_table_card_height_for_data_rows"
+            android:layout_gravity="start"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:layout_width="@dimen/data_table_check_box_width_height"
+                android:layout_height="@dimen/data_table_check_box_width_height"
+                app:buttonTint="@color/material_accent_A200"
+                android:layout_marginEnd="@dimen/data_table_perimeter_padding"/>
+
+            <TextView
+                android:text="@string/recipe_ingredients_item_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/data_table_header_font_size"
+                android:layout_marginEnd="@dimen/data_table_width_between_column"
+                android:textColor="@color/data_table_header_transparency_54_percent_black"/>
+
+            <TextView
+                android:text="@string/recipe_ingredients_quantity_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/data_table_header_font_size"
+                android:paddingStart="0dp"
+                android:paddingEnd="@dimen/data_table_width_between_column"
+                android:textColor="@color/data_table_header_transparency_54_percent_black"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/ingredients_data_table_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
+        <!-- TODO: insert list adapter to handle ingredients -->
+        <!-- TODO: make sure the ingredients table is auto-mirrored for RTL localization (Arabic) -->
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/data_table_card_height_for_last_row" />
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

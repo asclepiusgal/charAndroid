@@ -10,9 +10,20 @@
     <color name="material_green_700">#00C853</color>
     <color name="material_accent_A200">#FFAB40</color>
     <color name="black">#000000</color>
-    <color name="white">#FFFF</color>
+    <color name="white">#FFFFFF</color>
     <color name="material_blue_grey_fallback_300">#90A4AE</color>
     <color name="material_blue_grey_700">#455A64</color>
+    <color name="material_grey_400">#BDBDBD</color>
     <color name="material_pink_A400">#F50057</color>
+
+    <!-- Vertical Stepper transparency re: https://stackoverflow.com/a/39128318 -->
+    <color name="vertical_stepper_background_transparency_6_percent_black">#0F000000</color>
+    <color name="vertical_stepper_icon_text_transparency_38_percent_black">#61000000</color>
+    <color name="vertical_stepper_text_transparency_87_percent_black">#DE000000</color>
+
+    <!-- Data table transparency re: https://stackoverflow.com/a/39128318 -->
+    <color name="data_table_header_transparency_54_percent_black">#8A000000</color>
+    <color name="data_table_content_transparency_87_percent_black">#DE000000</color>
+    <color name="material_divider_transparency_12_percent_black">#1F000000</color>
 
 </resources>

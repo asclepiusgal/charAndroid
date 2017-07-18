@@ -39,6 +39,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:layout="@layout/activity_detail_flow_list_fragment" />
+        tools:layout="@layout/activity_detail_flow_detail_fragment" />
 
 </android.support.design.widget.CoordinatorLayout>

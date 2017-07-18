@@ -5,4 +5,12 @@
     android:layout_width="match_parent"
     android:orientation="vertical">
 
+    <!-- TODO: insert vertical stepper re: https://stackoverflow.com/a/13381228 -->
+    <!-- TODO: animate stepper re: https://robinhood.engineering/beautiful-animations-using-android-constraintlayout-eee5b72ecae3 -->
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/vertical_stepper_step_list_view"/>
+
 </LinearLayout>

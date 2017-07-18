@@ -1,6 +1,6 @@
 <resources>
 
-    <!-- Google Android Material Design guidelines -->
+    <!-- Google Android Material Design guidelines re: https://material.io/guidelines/ -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
@@ -9,8 +9,9 @@
     <dimen name="item_width">200dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="text_empty_list_font_size">56sp</dimen>
+    <dimen name="widget_margin">8dp</dimen>
 
-    <!-- CardView re: https://material.io/guidelines/components/cards.html#cards-content-blocks-->
+    <!-- CardView re: https://material.io/guidelines/components/cards.html#cards-content-blocks -->
     <dimen name="card_elevation_resting">2dp</dimen>
     <dimen name="card_corner_radius">4dp</dimen>
     <dimen name="card_title_text">24sp</dimen>
@@ -18,17 +19,39 @@
     <dimen name="card_padding">8dp</dimen>
     <dimen name="card_gutter">8dp</dimen>
 
+    <!-- Vertical Steppers re: https://material.io/guidelines/components/steppers.html#steppers-usage -->
+    <dimen name="vertical_stepper_active_circle_height_width">24dp</dimen>
+    <dimen name="vertical_stepper_circle_font_size">12sp</dimen>
+    <dimen name="vertical_stepper_step_font_size">14sp</dimen>
+    <dimen name="vertical_stepper_connector_line_border">1dp</dimen>
+    <dimen name="vertical_stepper_height">72dp</dimen>
+    <dimen name="vertical_stepper_icon_start_margin">24dp</dimen>
+    <dimen name="vertical_stepper_button_icon_end_margin">8dp</dimen>
+    <dimen name="vertical_stepper_vertical_div_view_start_margin">36dp</dimen>
+    <dimen name="vertical_stepper_active_content_start_margin">60dp</dimen>
+    <dimen name="vertical_stepper_active_button_height">48dp</dimen>
+    <dimen name="vertical_stepper_active_button_margin_top">16dp</dimen>
+    <dimen name="vertical_stepper_active_button_raised_elevation">2dp</dimen>
+    <dimen name="vertical_stepper_active_button_padding">12dp</dimen>
+    <dimen name="vertical_stepper_active_button_width">88dp</dimen>
+    <dimen name="vertical_stepper_active_button_font_size">14sp</dimen>
+    <dimen name="vertical_stepper_active_button_text_padding">32dp</dimen>
+
+    <!-- Data Table re: https://material.io/guidelines/components/data-tables.html# -->
+    <dimen name="data_table_card_title">20sp</dimen>
+    <dimen name="data_table_card_header_height">64dp</dimen>
+    <dimen name="data_table_card_height_for_last_row">56dp</dimen>
+    <dimen name="data_table_width_between_column">56dp</dimen>
+    <dimen name="data_table_card_height_for_data_rows">48dp</dimen>
+    <dimen name="data_table_check_box_width_height">18dp</dimen>
+    <dimen name="data_table_check_box_icon_container">24dp</dimen>
+    <dimen name="data_table_perimeter_padding">24dp</dimen>
+    <dimen name="data_table_content_font_size">13sp</dimen>
+    <dimen name="data_table_header_font_size">12sp</dimen>
+
     <!-- Buttons re: https://material.io/guidelines/components/buttons.html -->
     <dimen name="button_height_width">36dp</dimen>
     <dimen name="button_touchable_target_height">48dp</dimen>
-
     <dimen name="error_image_height_width">200dp</dimen>
-
-    <!--
-Refer to App Widget Documentation for margin information
-http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
-    -->
-    <dimen name="widget_margin">8dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

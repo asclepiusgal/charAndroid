@@ -8,21 +8,25 @@ A basic recipe app that utilizes Firebase's real-time database in cooperation wi
 _Android Technologies:_
 
 - Accessibility
-- Spanish, French, & Arabic translation
+- Spanish, French, & Arabic (RTL) translation
 - Espresso UI testing with intent verification & idle resources 
 - custom Widget service
-- detailFlow activity with data table & vertical stepper
-- SVG assets
+- detailFlow activity 
+- custom data table implementing Google Material Design principles
+- custom vertical stepper with custom animation TransitionManager on two UI scenes
+- SVG scalable assets
 - Google Material Design icons
 - Fragments & manager
-- SearchView / SearchManager / Google Voice Search
+- SearchView / SearchManager / Google Voice VUI Search
 - SwipeRefreshLayout
 - ConstraintLayout cardViews
 - tablet + phone UI layouts
 - recyclerView with heterogeneous XML layouts
 - ShareActionProvider
+- ExoPlayer video player with Google Cast
 - Facebook Stetho
 - Square LeakCanary
+- Square Phrase string localization (replaces xliff:g)
 - Square Picasso image rendering
 - Firebase real-time database
 - Parcelable object packaging
